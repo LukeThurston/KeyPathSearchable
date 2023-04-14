@@ -1,6 +1,6 @@
 import Foundation
 
-protocol KeyPathSearchable: KeyPathListable, Hashable, Identifiable {
+public protocol KeyPathSearchable: KeyPathListable, Hashable, Identifiable {
     
     typealias SearchResult = [String : Any]
     
@@ -10,7 +10,7 @@ protocol KeyPathSearchable: KeyPathListable, Hashable, Identifiable {
 
 extension KeyPathSearchable {
     
-    func search(_ searchTerm: String) -> SearchResult? {
+    public func search(_ searchTerm: String) -> SearchResult? {
         var result = SearchResult()
         allKeyPaths.forEach { key, keyValuePath in
             var optionalStringOfKeyPath: String? = nil

@@ -1,6 +1,6 @@
 import Foundation
 
-protocol KeyPathListable {
+public protocol KeyPathListable {
     
     associatedtype AnyOldObject
 
@@ -15,7 +15,7 @@ protocol KeyPathListable {
 
 extension KeyPathListable {
 
-    var keyPathReadableFormat: [String: Any] {
+    public var keyPathReadableFormat: [String: Any] {
         var description: [String: Any] = [:]
         let mirror = Mirror(reflecting: self)
         for case let (label?, value) in mirror.children {
@@ -24,16 +24,16 @@ extension KeyPathListable {
         return description
     }
 
-    var allKeyPaths: [String:KeyPath<Self, Any?>] {
-        var membersTokeyPaths: [String:KeyPath<Self, Any?>] = [:]
+    public var allKeyPaths: [String:KeyPath<Self, Any?>] {
+        var membersToKeyPaths: [String:KeyPath<Self, Any?>] = [:]
         let instance = Self()
         for (key, _) in instance.keyPathReadableFormat {
-            membersTokeyPaths[key] = \Self.keyPathReadableFormat[key]
+            membersToKeyPaths[key] = \Self.keyPathReadableFormat[key]
         }
-        return membersTokeyPaths
+        return membersToKeyPaths
     }
     
-    func valueFor(_ keyPath: KeyPath<AnyOldObject, Any?>) -> Any? {
+    public func valueFor(_ keyPath: KeyPath<AnyOldObject, Any?>) -> Any? {
         return (self as! AnyOldObject)[keyPath: keyPath]
     }
 
