@@ -35,7 +35,7 @@ extension KeyPathSearchable {
         return result.isEmpty ? nil : result
     }
     
-    private func search(for searchTerm: String, in array: [any KeyPathSearchable]) -> SearchResult? {
+    public func search(for searchTerm: String, in array: [any KeyPathSearchable]) -> SearchResult? {
         var result = SearchResult()
         
         array.forEach { element in
